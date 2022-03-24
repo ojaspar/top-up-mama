@@ -1,0 +1,23 @@
+<div [formGroup]="parentGroup" class="position-relative">
+  <input
+    [type]="options.type || 'text'"
+    [placeholder]="placeholder"
+    class="xw"
+    [id]="id"
+    [formControlName]="options.name"
+    (keyup.enter)="addText()"
+  />
+  <ng-content select="[body]" class="body"></ng-content>
+
+  <span
+    class="error-info"
+    *ngIf="
+      parentGroup.controls[options.field].touched &&
+      parentGroup.controls[options.field].invalid
+    "
+  >
+    <span>
+      {{ options.msg }}
+    </span>
+  </span>
+</div>

@@ -1,0 +1,26 @@
+.error-info {
+  font-size: 13px;
+  font-style: italic;
+  color: red;
+}
+
+.body {
+  position: absolute;
+  top: 13px;
+  right: 10px;
+}
+
+input {
+  background: #f8fbfc;
+  width: 100%;
+  outline: none;
+  font-weight: 350;
+  font-size: 14px;
+  line-height: 19px;
+  color: #111827;
+  padding: 0 30px 0 10px;
+  font-weight: 500;
+  height: 4rem;
+  border: 1px solid #0056c6;
+  border-radius: 10px;
+}
