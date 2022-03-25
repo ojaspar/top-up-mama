@@ -1,0 +1,40 @@
+.alert-container {
+  position: fixed;
+  bottom: 5vh;
+  right: 3vw;
+  z-index: 999;
+  .alert-info {
+    background: #fffaf0;
+    border: 2px solid #ed8936;
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-style: normal;
+    font-size: 18px;
+    line-height: 25px;
+    color: #c05621;
+  }
+
+  .alert-danger {
+    background: #fff5f5;
+    border: 2px solid #fd9696;
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-style: normal;
+    font-size: 18px;
+    line-height: 25px;
+    color: #c73737;
+  }
+  .alert-success {
+    background: #e6fffa;
+    border: 2px solid #38b2ac;
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-style: normal;
+    font-size: 18px;
+    line-height: 25px;
+    color: #345d60;
+  }
+  .rounded {
+    border-radius: 5px;
+  }
+}

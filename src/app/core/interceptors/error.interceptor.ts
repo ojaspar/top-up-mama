@@ -9,10 +9,11 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { NotificationsService } from '../services/shared/notifications.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor() {}
+  constructor(private notificationService: NotificationsService) {}
 
   intercept(
     req: HttpRequest<any>,
@@ -20,7 +21,10 @@ export class ErrorInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       catchError((err: HttpErrorResponse) => {
-        return throwError(err.error);
+        const { error } = err.error;
+        console.log(error);
+        this.notificationService.publishMessages(error, 'danger');
+        return throwError(error);
       })
     );
   }

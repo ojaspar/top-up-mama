@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthDataService } from 'src/app/core/services/auth.data.service';
+import { NotificationsService } from 'src/app/core/services/shared/notifications.service';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +12,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   isLoading: boolean = false;
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private authDataService: AuthDataService,
+    private notificationService: NotificationsService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.registerFormMethod();
@@ -30,5 +38,23 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  handleLogin(event: boolean) {}
+  handleLogin(event: boolean) {
+    if (event) {
+      this.isLoading = true;
+      this.authDataService.login(this.loginForm.value).subscribe(
+        (res) => {
+          if (res) {
+            this.isLoading = false;
+            this.notificationService.publishMessages(
+              'login successful',
+              'success'
+            );
+          }
+        },
+        (err) => {
+          if (err) this.isLoading = false;
+        }
+      );
+    }
+  }
 }

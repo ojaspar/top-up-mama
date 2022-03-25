@@ -50,6 +50,7 @@
               msg: msg2,
               name: 'confirmPassword'
             }"
+            (input)="compareBothPasswords()"
             show="password"
             placeholder="Password"
           ></app-password>
@@ -58,7 +59,7 @@
           <app-btn
             (buttonClick)="handleLogin($event)"
             [loading]="isLoading"
-            [disabled]="registerForm.invalid"
+            [disabled]="registerForm.invalid || !isEqual"
             buttonText="Register"
           ></app-btn>
         </div>

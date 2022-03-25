@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthDataService } from 'src/app/core/services/auth.data.service';
+import { NotificationsService } from 'src/app/core/services/shared/notifications.service';
+import { StorageService } from 'src/app/core/services/shared/storage.service';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +22,13 @@ export class RegisterComponent implements OnInit {
   msg: string = 'New Password is required';
   msg2: string = 'Confirm Password is required';
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private authDataService: AuthDataService,
+    private storageService: StorageService,
+    private notificationService: NotificationsService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.registerFormMethod();
@@ -67,5 +77,29 @@ export class RegisterComponent implements OnInit {
     )
       this.msg = 'The password should contain all characters listed below';
   }
-  handleLogin(event: boolean) {}
+  handleLogin(event: boolean) {
+    if (event) {
+      this.isLoading = true;
+      const { confirmPassword, ...args } = this.registerForm.value;
+      this.authDataService.registerUser(args).subscribe(
+        (res) => {
+          if (res) {
+            this.storageService.setItem('token', res.token);
+            this.notificationService.publishMessages(
+              `${this.registerForm.value.email} successfully registered`,
+              'success'
+            );
+            this.router.navigate(['/login']);
+          }
+
+          this.isLoading = false;
+        },
+        (err) => {
+          if (err) {
+            this.isLoading = false;
+          }
+        }
+      );
+    }
+  }
 }

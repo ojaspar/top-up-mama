@@ -5,15 +5,26 @@ import { AppInputComponent } from './components/app-input/app-input.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppPasswordComponent } from './components/app-password/app-password.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AppAlertComponent } from './components/app-alert/app-alert.component';
 
 @NgModule({
-  declarations: [AppBtnComponent, AppInputComponent, AppPasswordComponent],
+  declarations: [
+    AppBtnComponent,
+    AppAlertComponent,
+    AppInputComponent,
+    AppPasswordComponent,
+  ],
   imports: [
     MatProgressSpinnerModule,
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
   ],
-  exports: [AppBtnComponent, AppInputComponent, AppPasswordComponent],
+  exports: [
+    AppBtnComponent,
+    AppAlertComponent,
+    AppInputComponent,
+    AppPasswordComponent,
+  ],
 })
 export class SharedModule {}
