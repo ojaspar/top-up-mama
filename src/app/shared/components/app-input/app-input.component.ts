@@ -1,25 +1,15 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-
-interface IFormControlOption {
-  name: string | number | null;
-  field: string | number;
-  msg?: string;
-  type?: string | number;
-  ngClassName?: string | (string | number)[] | undefined;
-}
+import { IFormControlOption } from 'src/app/core/interfaces/app.interface';
 
 @Component({
-  selector: 'app-app-input',
+  selector: 'app-input',
   templateUrl: './app-input.component.html',
   styleUrls: ['./app-input.component.scss'],
 })
 export class AppInputComponent implements OnInit {
   @Input() parentGroup!: FormGroup;
-  @Input() options: IFormControlOption = {
-    name: null,
-    field: '',
-  };
+  @Input() options!: IFormControlOption;
   @Input() id!: string;
   @Input() value = '';
   @Input() placeholder!: string;

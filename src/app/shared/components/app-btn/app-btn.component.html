@@ -1,1 +1,10 @@
-<p>app-btn works!</p>
+<button (click)="handleClick()" class="btnClass" [disabled]="buttonIsDisabled">
+  <ng-content #body></ng-content>
+
+  <span *ngIf="!loading">{{ buttonText }}</span>
+  <div
+    class="d-flex justify-content-center align-content-center uploader-status"
+  >
+    <mat-spinner *ngIf="loading" [diameter]="20"></mat-spinner>
+  </div>
+</button>

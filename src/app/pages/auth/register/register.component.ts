@@ -7,7 +7,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  loginForm!: FormGroup;
+  registerForm!: FormGroup;
+  isLoading: boolean = false;
   hasSixCharacter: boolean = false;
   hasSpecial: boolean = false;
   hasUppercase: boolean = false;
@@ -19,10 +20,12 @@ export class RegisterComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.registerFormMethod();
+  }
 
-  loginFormMethod() {
-    this.loginForm = this.fb.group({
+  registerFormMethod() {
+    this.registerForm = this.fb.group({
       password: [
         '',
         Validators.compose([
@@ -38,8 +41,8 @@ export class RegisterComponent implements OnInit {
   }
 
   compareBothPasswords() {
-    let password = this.loginForm.value['password1'],
-      password2 = this.loginForm.value['password2'];
+    let password = this.registerForm.value['password'],
+      password2 = this.registerForm.value['confirmPassword'];
     if (password === password2) {
       this.isEqual = true;
     }
@@ -47,4 +50,22 @@ export class RegisterComponent implements OnInit {
       this.msg2 = 'Both Password does not match';
     }
   }
+  passwordStrengthChecker() {
+    let value = this.registerForm.value['password'];
+    this.hasSixCharacter = value.length >= 6;
+    this.hasNumber = /\d/.test(value);
+    this.hasUppercase = /[A-Z]/.test(value);
+    this.hasSpecial = /[!@#\\$%\\^\\&*\\)\\(+=._-]/.test(value);
+    this.hasLowerCase = /[a-z]/.test(value);
+
+    if (
+      value ||
+      !this.hasNumber ||
+      !this.hasUppercase ||
+      !this.hasSpecial ||
+      !this.hasLowerCase
+    )
+      this.msg = 'The password should contain all characters listed below';
+  }
+  handleLogin(event: boolean) {}
 }

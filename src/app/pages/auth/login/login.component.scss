@@ -1,0 +1,10 @@
+.main-container {
+  height: 100vh;
+  &.image {
+    height: 70vh;
+  }
+  h3 {
+    color: #323b4b;
+    font-weight: 700;
+  }
+}

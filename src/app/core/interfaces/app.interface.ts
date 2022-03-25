@@ -14,3 +14,10 @@ export interface IUser {
   last_name: string;
   avatar: string;
 }
+
+export interface IFormControlOption {
+  name: string | number | null;
+  field: string | number;
+  msg?: string;
+  type?: string | number;
+}

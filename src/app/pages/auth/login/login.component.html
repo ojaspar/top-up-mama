@@ -1,1 +1,49 @@
-<p>login works!</p>
+<div class="container d-flex align-items-center main-container">
+  <div class="row w-full">
+    <div class="col-6 d-flex justify-content-center">
+      <img src="assets/auth.svg" alt="main-image" class="image" />
+    </div>
+    <div class="col-6 d-flex flex-column justify-content-center">
+      <div class="mb-4">
+        <h3 class="mb-2">Sign In</h3>
+        <p class="">Welcome back!</p>
+      </div>
+      <div [formGroup]="loginForm">
+        <div class="mb-5">
+          <app-input
+            id="email"
+            [options]="{
+              field: 'email',
+              type: 'email',
+              msg: 'Email is required',
+              name: 'email'
+            }"
+            [parentGroup]="loginForm"
+            placeholder="@ your Email"
+          ></app-input>
+        </div>
+        <div class="mb-5">
+          <app-password
+            id="password"
+            [parentGroup]="loginForm"
+            [options]="{
+              field: 'password',
+              type: 'password',
+              msg: 'Password is required',
+              name: 'password'
+            }"
+            show="password"
+            placeholder="Password"
+          ></app-password>
+        </div>
+
+        <app-btn
+          (buttonClick)="handleLogin($event)"
+          [loading]="isLoading"
+          [disabled]="loginForm.invalid"
+          buttonText="Sign In"
+        ></app-btn>
+      </div>
+    </div>
+  </div>
+</div>

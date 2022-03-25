@@ -1,4 +1,6 @@
 import { environment } from 'src/environments/environment';
 
 
-export class SetUserDetails {}
+export class SetUserDetails {
+    
+}

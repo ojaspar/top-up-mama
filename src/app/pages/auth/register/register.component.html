@@ -1,1 +1,129 @@
-<p>register works!</p>
+<div class="container d-flex align-items-center main-container">
+  <div class="row w-full">
+    <div class="col-6 d-flex justify-content-center">
+      <img src="assets/auth.svg" alt="main-image" class="image" />
+    </div>
+    <div class="col-6 d-flex flex-column justify-content-center">
+      <div class="mb-4">
+        <h3 class="mb-2">Register</h3>
+      </div>
+      <div [formGroup]="registerForm">
+        <div class="mb-3">
+          <p>Email</p>
+          <app-input
+            id="email"
+            [options]="{
+              field: 'email',
+              type: 'email',
+              msg: 'Email is required',
+              name: 'email'
+            }"
+            [parentGroup]="registerForm"
+            placeholder="@ your Email"
+          ></app-input>
+        </div>
+        <div class="mb-3">
+          <p>Password</p>
+          <app-password
+            id="password"
+            [parentGroup]="registerForm"
+            [options]="{
+              field: 'password',
+              type: 'password',
+              msg: msg,
+              name: 'password'
+            }"
+            (input)="passwordStrengthChecker()"
+            show="password"
+            placeholder="Password"
+          ></app-password>
+        </div>
+
+        <div class="mb-3">
+          <p>Confirm Password</p>
+          <app-password
+            id="confirmPassword"
+            [parentGroup]="registerForm"
+            [options]="{
+              field: 'confirmPassword',
+              type: 'password',
+              msg: msg2,
+              name: 'confirmPassword'
+            }"
+            show="password"
+            placeholder="Password"
+          ></app-password>
+        </div>
+        <div class="mt-5">
+          <app-btn
+            (buttonClick)="handleLogin($event)"
+            [loading]="isLoading"
+            [disabled]="registerForm.invalid"
+            buttonText="Register"
+          ></app-btn>
+        </div>
+      </div>
+
+      <div>
+        <p class="ubtext-brand-neutral-ray-gray my-5 main-header">
+          Password must contain:
+        </p>
+        <div class="d-flex align-content-center">
+          <i class="fas fa-check active" aria-hidden="true"></i>
+          <p
+            class="ml-2"
+            [ngClass]="[
+              hasSixCharacter ? 'active fw-bold fst-italic' : 'neutral-gray'
+            ]"
+          >
+            At least 6 Characters
+          </p>
+        </div>
+        <div class="d-flex align-items-center ubmb-5">
+          <i class="fas fa-check active" aria-hidden="true"></i>
+          <p
+            class="ml-2"
+            [ngClass]="[
+              hasUppercase ? 'active fw-bold fst-italic' : 'neutral-gray'
+            ]"
+          >
+            At least 1 upper case letter (A - Z)
+          </p>
+        </div>
+        <div class="d-flex align-items-center ubmb-5">
+          <i class="fas fa-check active" aria-hidden="true"></i>
+          <p
+            class="ml-2"
+            [ngClass]="[
+              hasLowerCase ? 'active fw-bold fst-italic' : 'neutral-gray'
+            ]"
+          >
+            At least 1 lower case letter (a - z)
+          </p>
+        </div>
+        <div class="d-flex align-items-center ubmb-5">
+          <i class="fas fa-check active" aria-hidden="true"></i>
+          <p
+            class="ml-2"
+            [ngClass]="[
+              hasNumber ? 'active fw-bold fst-italic' : 'neutral-gray'
+            ]"
+          >
+            At least 1 number (0 - 9)
+          </p>
+        </div>
+        <div class="d-flex align-items-center ubmb-5">
+          <i class="fas fa-check active" aria-hidden="true"></i>
+          <p
+            class="ml-2"
+            [ngClass]="[
+              hasSpecial ? 'active fw-bold fst-italic' : 'neutral-gray'
+            ]"
+          >
+            At least 1 special character (@,#,%,-,$,!)
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

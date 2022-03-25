@@ -1,0 +1,21 @@
+.main-container {
+  height: 100vh;
+  &.image {
+    height: 70vh;
+  }
+  h3 {
+    color: #323b4b;
+    font-weight: 700;
+  }
+  .neutral-gray {
+    color: #b0b7c3;
+  }
+  .active {
+    color: green;
+  }
+  .main-header {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 700;
+  }
+}
