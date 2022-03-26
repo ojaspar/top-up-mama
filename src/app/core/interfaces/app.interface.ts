@@ -8,7 +8,7 @@ export interface IAuth {
 }
 
 export interface IUser {
-  id: string;
+  id: string | number;
   email: string;
   first_name: string;
   last_name: string;

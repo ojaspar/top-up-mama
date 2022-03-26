@@ -1,0 +1,17 @@
+<div class="d-flex justify-content-between align-content-center">
+  <nav aria-label="...">
+    <ul class="pagination pagination-lg">
+      <li
+        class="page-item"
+        *ngFor="let length of numbers; let i = index"
+        :[ngClass]="{'active': length === data?.page}"
+        (click)="paginatorIndex(length)"
+      >
+        <a class="page-link">{{ length }}</a>
+      </li>
+    </ul>
+  </nav>
+  <div>
+    <p>{{ data?.per_page }} of {{ data?.total }}</p>
+  </div>
+</div>

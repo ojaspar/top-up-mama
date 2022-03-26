@@ -1,1 +1,27 @@
-<p>users works!</p>
+<div class="row" *ngIf="users.length >= 1">
+  <div class="col-4 mb-4" *ngFor="let user of users">
+    <div class="card" style="width: 18rem">
+      <img [src]="user.avatar" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title">{{ user.email }}</h5>
+        <p class="card-text">
+          Full Name: {{ user.first_name }} {{ user.last_name }}
+        </p>
+        <div class="d-flex justify-content-between">
+          <a class="btn btn-primary" routerLink="/user/{{ user.id }}">Edit</a>
+          <a class="btn btn-danger" (click)="deleteUser(user.id)">Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-app-paginator
+    [data]="paginatorData"
+    (currentIndex)="getIndex($event)"
+  ></app-app-paginator>
+</div>
+<div *ngIf="users.length <= 0">
+  <div class="d-flex justify-content-center align-content-center">
+    <img src="assets/no-data.svg" alt="empty-state" />
+  </div>
+  <h5 class="card-title text-center mt-5">No Data</h5>
+</div>

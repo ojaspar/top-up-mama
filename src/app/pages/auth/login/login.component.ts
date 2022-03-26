@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthDataService } from 'src/app/core/services/auth.data.service';
+import { GeolocationService } from 'src/app/core/services/shared/geo-location.service';
 import { NotificationsService } from 'src/app/core/services/shared/notifications.service';
 
 @Component({
@@ -16,11 +17,13 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private authDataService: AuthDataService,
     private notificationService: NotificationsService,
-    private router: Router
+    private router: Router,
+    private geolocation: GeolocationService
   ) {}
 
   ngOnInit(): void {
     this.registerFormMethod();
+    this.geolocation.getLocation().then((res) => console.log(res));
   }
 
   registerFormMethod(): void {

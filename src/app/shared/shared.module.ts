@@ -6,6 +6,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppPasswordComponent } from './components/app-password/app-password.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AppAlertComponent } from './components/app-alert/app-alert.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { AppDashboardComponent } from './components/app-dashboard/app-dashboard.component';
+import { AppSidebarComponent } from './components/app-sidebar/app-sidebar.component';
+import { AppPaginatorComponent } from './components/app-paginator/app-paginator.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +17,10 @@ import { AppAlertComponent } from './components/app-alert/app-alert.component';
     AppAlertComponent,
     AppInputComponent,
     AppPasswordComponent,
+    NavbarComponent,
+    AppDashboardComponent,
+    AppSidebarComponent,
+    AppPaginatorComponent,
   ],
   imports: [
     MatProgressSpinnerModule,
@@ -25,6 +33,10 @@ import { AppAlertComponent } from './components/app-alert/app-alert.component';
     AppAlertComponent,
     AppInputComponent,
     AppPasswordComponent,
+    NavbarComponent,
+    AppSidebarComponent,
+    AppDashboardComponent,
+    AppPaginatorComponent,
   ],
 })
 export class SharedModule {}
