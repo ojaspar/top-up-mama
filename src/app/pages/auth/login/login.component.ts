@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { AuthDataService } from 'src/app/core/services/auth.data.service';
 import { GeolocationService } from 'src/app/core/services/shared/geo-location.service';
 import { NotificationsService } from 'src/app/core/services/shared/notifications.service';
+import { StorageService } from 'src/app/core/services/shared/storage.service';
+import { UserDataService } from 'src/app/core/services/user.data.service';
 
 @Component({
   selector: 'app-login',
@@ -17,16 +19,18 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private authDataService: AuthDataService,
     private notificationService: NotificationsService,
+    private geolocation: GeolocationService,
+    private storageService: StorageService,
     private router: Router,
-    private geolocation: GeolocationService
+    private userDataService: UserDataService
   ) {}
 
   ngOnInit(): void {
-    this.registerFormMethod();
+    this.loginFormMethod();
     this.geolocation.getLocation().then((res) => console.log(res));
   }
 
-  registerFormMethod(): void {
+  loginFormMethod(): void {
     this.loginForm = this.fb.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: [
@@ -47,11 +51,10 @@ export class LoginComponent implements OnInit {
       this.authDataService.login(this.loginForm.value).subscribe(
         (res) => {
           if (res) {
+            this.storageService.setItem('access_token', res?.token);
             this.isLoading = false;
-            this.notificationService.publishMessages(
-              'login successful',
-              'success'
-            );
+
+            this.getSingleUser(4);
           }
         },
         (err) => {
@@ -59,5 +62,18 @@ export class LoginComponent implements OnInit {
         }
       );
     }
+  }
+
+  getSingleUser(id: number) {
+    this.userDataService.getSingleUser(id).subscribe((res) => {
+      if (res) {
+        this.storageService.setItem(
+          'authenticatedUser',
+          JSON.stringify(res.data)
+        );
+        this.router.navigate(['/users']);
+        this.notificationService.publishMessages('login successful', 'success');
+      }
+    });
   }
 }

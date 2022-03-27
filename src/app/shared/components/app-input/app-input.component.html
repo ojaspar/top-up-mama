@@ -1,11 +1,11 @@
 <div [formGroup]="parentGroup" class="position-relative">
   <input
     [type]="options.type || 'text'"
-    [placeholder]="placeholder"
-    class="xw"
+    [placeholder]="Maintenances"
     [id]="id"
     [formControlName]="options.name"
     (keyup.enter)="addText()"
+    [value]="value"
   />
   <ng-content select="[body]" class="body"></ng-content>
 

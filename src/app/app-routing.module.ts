@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CanActivateGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'auth',
     loadChildren: () =>
       import('./pages/auth/auth.module').then((m) => m.AuthModule),
   },
@@ -11,10 +12,11 @@ const routes: Routes = [
     path: '',
     loadChildren: () =>
       import('./pages/main/main.module').then((m) => m.MainModule),
+    canActivate: [CanActivateGuard],
   },
   {
     path: '**',
-    redirectTo: 'login',
+    redirectTo: 'auth/login',
   },
 ];
 

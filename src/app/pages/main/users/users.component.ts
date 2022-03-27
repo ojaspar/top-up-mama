@@ -16,6 +16,7 @@ export class UsersComponent implements OnInit {
   }
 
   getAllUsers(page: number = 1) {
+    console.log('heee');
     this.userDataService.getAllUsers(page).subscribe((res) => {
       if (res) {
         const { data, total, page, per_page, total_pages } = res;
@@ -25,7 +26,7 @@ export class UsersComponent implements OnInit {
           page,
           total_pages,
           total,
-          per_page,
+          per_page: page === 1 ? per_page : per_page * page,
         };
       }
     });

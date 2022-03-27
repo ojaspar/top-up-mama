@@ -1,1 +1,56 @@
-<p>profile works!</p>
+<div class="container">
+  <div class="col-6 d-flex flex-column justify-content-center">
+    <div class="mb-4">
+      <h3 class="mb-2">User Profile</h3>
+    </div>
+    <div [formGroup]="userForm">
+      <div class="mb-5">
+        <app-input
+          id="name"
+          [options]="{
+            field: 'first_name',
+            type: 'text',
+            msg: 'First Name is required',
+            name: 'first_name'
+          }"
+          [parentGroup]="userForm"
+          placeholder="John"
+        ></app-input>
+      </div>
+      <div class="mb-5">
+        <app-input
+          id="name"
+          [options]="{
+            field: 'last_name',
+            type: 'text',
+            msg: 'Last Name is required',
+            name: 'last_name'
+          }"
+          [parentGroup]="userForm"
+          placeholder="Doe"
+        ></app-input>
+      </div>
+
+      <div class="mb-5">
+        <app-input
+          id="name"
+          [options]="{
+            field: 'email',
+            type: 'email',
+            msg: 'email is required',
+            name: 'email'
+          }"
+          [parentGroup]="userForm"
+          placeholder="@ your email"
+        ></app-input>
+      </div>
+
+      <app-btn
+        (buttonClick)="updateUser($event)"
+        [loading]="isLoading"
+        [disabled]="userForm.invalid"
+        buttonText="Update User"
+      ></app-btn>
+    </div>
+  </div>
+</div>

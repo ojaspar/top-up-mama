@@ -1,10 +1,10 @@
 <div class="dashboard-layout">
   <aside tabindex="0" ref="sidebar" class="active sidenav">
-    <app-sidebar></app-sidebar>
+    <app-sidebar [authenticatedUser]="authenticatedUser"></app-sidebar>
   </aside>
   <main>
     <header class="header">
-      <app-navbar [authenticatedUser]="authenticatedUser"></app-navbar>
+      <app-navbar></app-navbar>
     </header>
     <ng-content select="[body]"></ng-content>
   </main>

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { StorageService } from 'src/app/core/services/shared/storage.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app-sidebar.component.scss'],
 })
 export class AppSidebarComponent implements OnInit {
-  constructor() {}
+  @Input() authenticatedUser: any;
+  constructor(private storageService: StorageService, private router: Router) {}
 
   ngOnInit(): void {}
+
+  logout(): void {
+    this.storageService.clear();
+    this.router.navigate(['/auth/login']);
+  }
 }

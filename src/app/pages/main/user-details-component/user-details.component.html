@@ -1,1 +1,42 @@
-<div class="container"></div>
+<div class="container">
+  <div class="col-6 d-flex flex-column justify-content-center">
+    <div class="mb-4">
+      <h3 class="mb-2">Update Job</h3>
+    </div>
+    <div [formGroup]="userForm">
+      <div class="mb-5">
+        <app-input
+          id="name"
+          [options]="{
+            field: 'name',
+            type: 'text',
+            msg: 'Name is required',
+            name: 'name'
+          }"
+          [parentGroup]="userForm"
+          placeholder="John Doe"
+        ></app-input>
+      </div>
+      <div class="mb-5">
+        <app-input
+          id="name"
+          [options]="{
+            field: 'job',
+            type: 'text',
+            msg: 'Job is required',
+            name: 'job'
+          }"
+          [parentGroup]="userForm"
+          placeholder="Maintenances"
+        ></app-input>
+      </div>
+
+      <app-btn
+        (buttonClick)="updateUser($event)"
+        [loading]="isLoading"
+        [disabled]="userForm.invalid"
+        buttonText="Update User"
+      ></app-btn>
+    </div>
+  </div>
+</div>

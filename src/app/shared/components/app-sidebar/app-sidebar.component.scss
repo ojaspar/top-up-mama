@@ -37,64 +37,21 @@
     -webkit-box-pack: justify !important;
     cursor: pointer;
   }
-  //   &__icon {
-  //     background-color: inherit;
-  //     box-sizing: border-box;
-  //     border-radius: 14px;
-  //     display: flex;
-  //     align-items: center;
-  //     justify-content: center;
-  //     flex: 0 0 40px;
-  //   }
-  //   &__icon-text {
-  //     font-style: normal;
-  //     font-weight: normal;
-  //     font-size: 15px;
-  //     line-height: 15px;
-  //     display: flex;
-  //     align-items: center;
-  //     // color: $ebill-light-green;
-  //     color: white;
-  //     // margin: 0;
-  //     font-weight: 200;
-  //     font-size: 14px;
-  //   }
-  //   &__user-container {
-  //     height: 70px;
-  //     &-user-image {
-  //       height: 42px;
-  //       width: 42px;
-  //       border-radius: 50px;
-  //     }
-  //   }
-  //   &__user-name-layout {
-  //     margin-left: 15px;
-  //     &-text {
-  //       color: white;
-  //       margin: 0;
-  //       font-size: 16px;
-  //       line-height: 20px;
-  //     }
-  //     &-text-span {
-  //       color: white;
-  //       font-size: 12px;
-  //       line-height: 15px;
-  //     }
-  //   }
-  //   &__highlight {
-  //     border-radius: 20px;
-  //     border-radius: 7px;
-  //     background: $rays-yellow;
-  //     color: #f9fbfb;
-  //     font-weight: bold;
-  //   }
-  //   // &:hover {
-  //   //   cursor: pointer;
-  //   //   background-color: white;
-  //   //   color: white;
-  //   // }
-  //   &__height {
-  //     height: 40px;
-  //     margin-top: 7px;
-  //   }
+  h3,
+  p {
+    color: #fff;
+  }
+  img {
+    border-radius: 50px;
+  }
+  button {
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    padding: 15px;
+    background: black;
+    color: #fff;
+    position: relative;
+    top: 400px;
+  }
 }

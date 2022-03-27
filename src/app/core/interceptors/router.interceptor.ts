@@ -18,22 +18,15 @@ export class RouterInterceptor implements HttpInterceptor {
     req: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    if (!req.headers.has('Content-Type')) {
-      this.token = JSON.parse(this.storage.getItem('access_token'));
+    this.token = this.storage.getItem('access_token');
+
+    if (this.token) {
       req = req.clone({
         setHeaders: {
           Authorization: `Bearer ${this.token}`,
         },
       });
     }
-    req = this.addAuthenticationToken(req);
     return next.handle(req);
-  }
-
-  private addAuthenticationToken(request: HttpRequest<any>): HttpRequest<any> {
-    if (!this.token) return request;
-    return request.clone({
-      headers: request.headers.set(this.AUTH_HEADER, 'Bearer ' + this.token),
-    });
   }
 }

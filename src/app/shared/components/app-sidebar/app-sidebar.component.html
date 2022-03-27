@@ -1,5 +1,19 @@
 <div class="sidenav">
   <ul class="sidenav__list">
-    <li class="sidenav__list-item-nav-link"></li>
+    <li>
+      <img [src]="authenticatedUser?.avatar" alt="image" />
+    </li>
+    <li class="sidenav__list-item-nav-link">
+      <h3>
+        {{ authenticatedUser?.first_name }} {{ authenticatedUser?.last_name }}
+      </h3>
+    </li>
+    <li class="sidenav__list-item-nav-link">
+      <p>location:</p>
+    </li>
+
+    <li class="button" (click)="logout()">
+      <button>Logout</button>
+    </li>
   </ul>
 </div>

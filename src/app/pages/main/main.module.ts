@@ -7,6 +7,7 @@ import { UsersComponent } from './users/users.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UserDetailsComponent } from './user-details-component/user-details.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,12 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ProfileComponent,
     UserDetailsComponent,
   ],
-  imports: [CommonModule, MainRoutingModule, SharedModule],
+  imports: [
+    CommonModule,
+    MainRoutingModule,
+    SharedModule,
+    ReactiveFormsModule,
+    FormsModule,
+  ],
 })
 export class MainModule {}
