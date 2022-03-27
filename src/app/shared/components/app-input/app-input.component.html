@@ -1,7 +1,7 @@
 <div [formGroup]="parentGroup" class="position-relative">
   <input
     [type]="options.type || 'text'"
-    [placeholder]="Maintenances"
+    [placeholder]="placeholder"
     [id]="id"
     [formControlName]="options.name"
     (keyup.enter)="addText()"
