@@ -29,8 +29,8 @@ export class LoginComponent implements OnInit {
     this.loginFormMethod();
     this.geolocation.getLocation().then((res) => {
       if (res) {
-        console.log(res);
-        // this.displayLocation(res.lat, res.lng);
+        // console.log(res);
+        this.displayLocation(res.lat, res.lng);
       }
     });
   }
@@ -40,6 +40,9 @@ export class LoginComponent implements OnInit {
     geocoder = new google.maps.Geocoder();
     var latlng = new google.maps.LatLng(latitude, longitude);
     console.log(latlng);
+    geocoder.geocode({ location: latlng }, (res) => {
+      console.log(res);
+    });
     // geocoder.geocode(
     //     {'latLng': latlng},
     //     function(results, status) {
