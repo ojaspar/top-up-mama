@@ -25,9 +25,13 @@
     "bootstrap": "^5.1.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.11.4"
+    "zone.js": "~0.11.4",
+    "@ngxs/logger-plugin": "^3.7.0",
+    "@ngxs/storage-plugin": "^3.7.1",
+    "@ngxs/store": "^3.7.2"
   },
   "devDependencies": {
+    "@ngxs/devtools-plugin": "^3.7.1",
     "@angular-devkit/build-angular": "~12.2.6",
     "@angular/cli": "~12.2.6",
     "@angular/compiler-cli": "~12.2.0",

@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { IUser } from 'src/app/core/interfaces/app.interface';
 import { AuthDataService } from 'src/app/core/services/auth.data.service';
 import { NotificationsService } from 'src/app/core/services/shared/notifications.service';
 import { StorageService } from 'src/app/core/services/shared/storage.service';
+import { SetUserDetails } from 'src/app/store/app.action';
+import { AppState } from 'src/app/store/app.state';
 
 @Component({
   selector: 'app-profile',
@@ -14,16 +19,19 @@ export class ProfileComponent implements OnInit {
   loginForm!: FormGroup;
   isLoading: boolean = false;
   userForm!: FormGroup;
-  user: any;
   constructor(
     private fb: FormBuilder,
-    private authDataService: AuthDataService,
     private notificationService: NotificationsService,
-    private storageService: StorageService,
-    private router: Router
-  ) {
-    this.user = JSON.parse(this.storageService.getItem('authenticatedUser'));
-    console.log(this.user);
+    private store: Store
+  ) {}
+
+  @Select(AppState.getUserDetails)
+  public userInfo$!: Observable<IUser>;
+
+  get userDetails(): IUser {
+    let data: any;
+    this.userInfo$.subscribe((user) => (data = user));
+    return data;
   }
 
   ngOnInit(): void {
@@ -32,22 +40,26 @@ export class ProfileComponent implements OnInit {
 
   userFormMethod(): void {
     this.userForm = this.fb.group({
-      first_name: [this.user?.first_name, Validators.required],
-      last_name: [this.user?.last_name, Validators.required],
+      first_name: [this.userDetails?.first_name, Validators.required],
+      last_name: [this.userDetails?.last_name, Validators.required],
       email: [
-        this.user?.email,
+        this.userDetails?.email,
         Validators.compose([Validators.email, Validators.required]),
       ],
-      image: [this.user?.image],
+      avatar: [this.userDetails?.avatar],
     });
   }
   updateUser(event: boolean) {
     if (event) {
-      console.log(this.userForm.value);
-      this.storageService.setItem(
-        'authenticatedUser',
-        JSON.stringify(this.userForm.value)
-      );
+      this.isLoading = true;
+      this.store.dispatch(new SetUserDetails(this.userForm.value));
+      setTimeout(() => {
+        this.isLoading = false;
+        this.notificationService.publishMessages(
+          'user updated successfully',
+          'success'
+        );
+      }, 2000);
     }
   }
 }

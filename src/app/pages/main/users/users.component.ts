@@ -16,11 +16,9 @@ export class UsersComponent implements OnInit {
   }
 
   getAllUsers(page: number = 1) {
-    console.log('heee');
     this.userDataService.getAllUsers(page).subscribe((res) => {
       if (res) {
         const { data, total, page, per_page, total_pages } = res;
-        console.log(res);
         this.users = data;
         this.paginatorData = {
           page,

@@ -1,12 +1,10 @@
 <div class="sidenav">
   <ul class="sidenav__list">
     <li>
-      <img [src]="authenticatedUser?.avatar" alt="image" />
+      <img [src]="userDetails.avatar" alt="image" />
     </li>
     <li class="sidenav__list-item-nav-link">
-      <h3>
-        {{ authenticatedUser?.first_name }} {{ authenticatedUser?.last_name }}
-      </h3>
+      <h3>{{ userDetails?.first_name }} {{ userDetails?.last_name }}</h3>
     </li>
     <li class="sidenav__list-item-nav-link">
       <p>location:</p>

@@ -25,13 +25,6 @@ export class UserDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.userFormMethod();
-    this.getUserDetails(this.id);
-  }
-
-  getUserDetails(id: number) {
-    this.userDataService.getSingleUser(id).subscribe((res) => {
-      console.log(res);
-    });
   }
 
   userFormMethod(): void {

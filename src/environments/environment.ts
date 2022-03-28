@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   apiBaseURI: 'https://reqres.in/api/',
+  appName: 'topMama',
 };
 
 /*

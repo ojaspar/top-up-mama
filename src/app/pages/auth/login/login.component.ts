@@ -7,6 +7,8 @@ import { NotificationsService } from 'src/app/core/services/shared/notifications
 import { StorageService } from 'src/app/core/services/shared/storage.service';
 import { UserDataService } from 'src/app/core/services/user.data.service';
 import {} from 'googlemaps';
+import { Store } from '@ngxs/store';
+import { SetUserDetails } from 'src/app/store/app.action';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -22,57 +24,16 @@ export class LoginComponent implements OnInit {
     private geolocation: GeolocationService,
     private storageService: StorageService,
     private router: Router,
-    private userDataService: UserDataService
+    private userDataService: UserDataService,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
     this.loginFormMethod();
     this.geolocation.getLocation().then((res) => {
       if (res) {
-        // console.log(res);
-        this.displayLocation(res.lat, res.lng);
       }
     });
-  }
-
-  displayLocation(latitude: any, longitude: any) {
-    let newGeo = new google.maps.Geocoder();
-    console.log(newGeo);
-    var latlng = new google.maps.LatLng(latitude, longitude);
-    // // console.log(latlng);
-    // latlng.geocode({ location: latlng }, (res) => {
-    //   console.log(res);
-    // });
-    newGeo.geocode({ location: latlng }, (res, status) => {
-      if (status == google.maps.GeocoderStatus.OK) {
-        if (res[0]) {
-          console.log(res[0]);
-        }
-      }
-    });
-    // geocoder.geocode(
-    //     {'latLng': latlng},
-    //     function(results, status) {
-    //         if (status == google.maps.GeocoderStatus.OK) {
-    //             if (results[0]) {
-    //                 var add= results[0].formatted_address ;
-    //                 var  value=add.split(",");
-
-    //                 count=value.length;
-    //                 country=value[count-1];
-    //                 state=value[count-2];
-    //                 city=value[count-3];
-    //                 x.innerHTML = "city name is: " + city;
-    //             }
-    //             else  {
-    //                 x.innerHTML = "address not found";
-    //             }
-    //         }
-    //         else {
-    //             x.innerHTML = "Geocoder failed due to: " + status;
-    //         }
-    //     }
-    // );
   }
 
   loginFormMethod(): void {
@@ -112,10 +73,11 @@ export class LoginComponent implements OnInit {
   getSingleUser(id: number) {
     this.userDataService.getSingleUser(id).subscribe((res) => {
       if (res) {
-        this.storageService.setItem(
-          'authenticatedUser',
-          JSON.stringify(res.data)
-        );
+        this.store.dispatch(new SetUserDetails(res.data));
+        // this.storageService.setItem(
+        //   'authenticatedUser',
+        //   JSON.stringify(res.data)
+        // );
         this.router.navigate(['/users']);
         this.notificationService.publishMessages('login successful', 'success');
       }
