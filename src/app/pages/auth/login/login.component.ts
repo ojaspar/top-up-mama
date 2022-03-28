@@ -6,7 +6,7 @@ import { GeolocationService } from 'src/app/core/services/shared/geo-location.se
 import { NotificationsService } from 'src/app/core/services/shared/notifications.service';
 import { StorageService } from 'src/app/core/services/shared/storage.service';
 import { UserDataService } from 'src/app/core/services/user.data.service';
-
+import {} from 'googlemaps';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -27,7 +27,42 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginFormMethod();
-    this.geolocation.getLocation().then((res) => console.log(res));
+    this.geolocation.getLocation().then((res) => {
+      if (res) {
+        console.log(res);
+        // this.displayLocation(res.lat, res.lng);
+      }
+    });
+  }
+
+  displayLocation(latitude: any, longitude: any) {
+    var geocoder;
+    geocoder = new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(latitude, longitude);
+    console.log(latlng);
+    // geocoder.geocode(
+    //     {'latLng': latlng},
+    //     function(results, status) {
+    //         if (status == google.maps.GeocoderStatus.OK) {
+    //             if (results[0]) {
+    //                 var add= results[0].formatted_address ;
+    //                 var  value=add.split(",");
+
+    //                 count=value.length;
+    //                 country=value[count-1];
+    //                 state=value[count-2];
+    //                 city=value[count-3];
+    //                 x.innerHTML = "city name is: " + city;
+    //             }
+    //             else  {
+    //                 x.innerHTML = "address not found";
+    //             }
+    //         }
+    //         else {
+    //             x.innerHTML = "Geocoder failed due to: " + status;
+    //         }
+    //     }
+    // );
   }
 
   loginFormMethod(): void {

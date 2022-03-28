@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import { RouterInterceptor } from './core/interceptors/router.interceptor';
 import { SharedModule } from './shared/shared.module';
-
 @NgModule({
   declarations: [AppComponent],
   imports: [
