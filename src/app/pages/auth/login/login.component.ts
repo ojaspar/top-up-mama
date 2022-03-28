@@ -36,12 +36,19 @@ export class LoginComponent implements OnInit {
   }
 
   displayLocation(latitude: any, longitude: any) {
-    var geocoder;
-    geocoder = new google.maps.Geocoder();
+    let newGeo = new google.maps.Geocoder();
+    console.log(newGeo);
     var latlng = new google.maps.LatLng(latitude, longitude);
-    console.log(latlng);
-    geocoder.geocode({ location: latlng }, (res) => {
-      console.log(res);
+    // // console.log(latlng);
+    // latlng.geocode({ location: latlng }, (res) => {
+    //   console.log(res);
+    // });
+    newGeo.geocode({ location: latlng }, (res, status) => {
+      if (status == google.maps.GeocoderStatus.OK) {
+        if (res[0]) {
+          console.log(res[0]);
+        }
+      }
     });
     // geocoder.geocode(
     //     {'latLng': latlng},
